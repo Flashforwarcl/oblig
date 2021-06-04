@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>QUnit Example</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src= "model.js"></script>
+    <script src= "controller.js"></script>
+    <script>
+
+//mock view
+function showClock() {};
+function make1if() {};
+function makeDropDown() {};
+        
+        QUnit.test("test clocks", function (assert) {
+            currentTime = "";
+            setClock()
+            const actual = currentTime.length;
+            const expected = 5;
+            assert.equal(actual, expected, currentTime);
+        });
+        QUnit.test("test timezone 1", function (assert) {
+            aryLoop()
+            const actual = listZones.indexOf("Asia/Dubai")
+            const expected = -1
+            assert.notEqual(actual, expected);
+        });
+        QUnit.test("test timezone 2", function (assert) {
+            aryLoop()
+            const actual = listZones.indexOf("Europe/Oslo")
+            const expected = -1
+            assert.notEqual(actual, expected);
+        });
+        QUnit.test("Check Timezone", function (assert) {
+            selZone = "Europe/Oslo"
+            setZone("Europe/Oslo")
+            const actual = selectedTimezone
+            const expected = selZone
+            assert.equal(actual, expected, selZone);
+        });
+        QUnit.test("Check selected Timezone", function (assert) {
+            selZone = "Europe/Oslo"
+            selctedZone = { timeZone: "Europe/Oslo" }
+            setZone(selZone)
+            const actual = setTimezone
+            const expected = selctedZone
+            assert.deepEqual(actual, expected);
+        });
+        QUnit.test("Check time of selected Timezone", function (assert) {
+            selZone = "Europe/Oslo"
+            time = new Date().toLocaleTimeString("no-NO", { timeZone: "Europe/Oslo" })
+            setZone(selZone)
+            const actual = chosenTimeZone
+            const expected = time
+            assert.equal(actual, expected, time);
+        });
+    </script>
+</body>
+</html>
